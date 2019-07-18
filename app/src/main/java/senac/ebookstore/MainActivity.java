@@ -17,29 +17,29 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    //mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_romances:
-                    //mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_negocios:
-                    //mTextMessage.setText(R.string.title_notifications);
-                    return true;
-                case R.id.navigation_tecnicos:
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.navigation_home:
+                            //mTextMessage.setText(R.string.title_home);
+                            return true;
+                        case R.id.navigation_romances:
+                            //mTextMessage.setText(R.string.title_dashboard);
+                            return true;
+                        case R.id.navigation_negocios:
+                            //mTextMessage.setText(R.string.title_notifications);
+                            return true;
+                        case R.id.navigation_tecnicos:
 
-                    return true;
-                case R.id.navigation_ebook:
-                    Intent intent = new Intent(getBaseContext(), EbookActivity.class);
-                    startActivity(intent);
-                    return true;
-            }
-            return false;
+                            return true;
+                        case R.id.navigation_ebook:
+                            Intent intent = new Intent(getBaseContext(), EbookActivity.class);
+                            startActivity(intent);
+                            return true;
+                    }
+                    return false;
         }
     };
 
