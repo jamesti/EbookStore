@@ -14,38 +14,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="Código ISBN"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/txtTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="Título do Livro"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/txtAutor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="Autor do Livro"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/txtTipo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="Tipo do Livro"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/txtSinopse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="Sinopse do Livro"
+        android:inputType="textPersonName" />
 </LinearLayout>

@@ -43,12 +43,14 @@ public class EbookActivity extends AppCompatActivity {
                 String tipo = txtTipo.getText().toString();
                 String sinopse = txtSinopse.getText().toString();
 
-                Ebook ebook = new Ebook(isbn, null, titulo, autor, tipo, sinopse, null);
+                Ebook ebook = new Ebook(isbn, null, titulo, autor, sinopse, tipo,null);
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference("ebook-" + ebook.getIsbn());
 
                 myRef.setValue(ebook);
+
+                finish();
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
