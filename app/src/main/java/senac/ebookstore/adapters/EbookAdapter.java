@@ -46,7 +46,7 @@ public class EbookAdapter extends RecyclerView.Adapter<EbookAdapter.EbookViewHol
 
         final Ebook ebook = ebookList.get(position);
 
-        viewHolder.imgEbook.setImageURI(Uri.parse(ebook.getImageUrl()));
+        //viewHolder.imgEbook.setImageURI(Uri.parse(ebook.getImageUrl()));
         viewHolder.txtTitulo.setText(ebook.getTitulo());
         viewHolder.txtTipo.setText(ebook.getTipo());
         viewHolder.txtAutor.setText(ebook.getAutor());
