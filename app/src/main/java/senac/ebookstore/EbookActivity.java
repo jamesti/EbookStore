@@ -11,13 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import senac.ebookstore.models.Ebook;
 
 public class EbookActivity extends AppCompatActivity {
 
-    TextView txtIsbn, txtTitulo, txtAutor, txtTipo, txtSinopse;
+    TextView txtIsbn, txtTitulo, txtAutor, txtSinopse;
+    Spinner spinnerTipos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,7 @@ public class EbookActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         txtIsbn = findViewById(R.id.txtISBN);
-        txtTipo = findViewById(R.id.txtTipo);
+        spinnerTipos = findViewById(R.id.spinnerTipos);
         txtTitulo = findViewById(R.id.txtTitulo);
         txtAutor = findViewById(R.id.txtAutor);
         txtSinopse = findViewById(R.id.txtSinopse);
@@ -40,13 +42,13 @@ public class EbookActivity extends AppCompatActivity {
                 String isbn = txtIsbn.getText().toString();
                 String titulo = txtTitulo.getText().toString();
                 String autor = txtAutor.getText().toString();
-                String tipo = txtTipo.getText().toString();
+                String tipo = (String) spinnerTipos.getSelectedItem();
                 String sinopse = txtSinopse.getText().toString();
 
                 Ebook ebook = new Ebook(isbn, null, titulo, autor, sinopse, tipo,null);
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("ebook-" + ebook.getIsbn());
+                DatabaseReference myRef = database.getReference("ebooks/" + ebook.getTipo() + "/" + ebook.getIsbn());
 
                 myRef.setValue(ebook);
 

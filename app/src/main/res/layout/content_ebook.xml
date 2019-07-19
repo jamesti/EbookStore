@@ -33,13 +33,11 @@
         android:hint="Autor do Livro"
         android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/txtTipo"
+    <Spinner
+        android:id="@+id/spinnerTipos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Tipo do Livro"
-        android:inputType="textPersonName" />
+        android:entries="@array/tipos" />
 
     <EditText
         android:id="@+id/txtSinopse"
