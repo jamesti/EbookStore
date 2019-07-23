@@ -45,10 +45,16 @@ public class EbookActivity extends AppCompatActivity {
                 String tipo = (String) spinnerTipos.getSelectedItem();
                 String sinopse = txtSinopse.getText().toString();
 
+                if (isbn.isEmpty()){
+                    txtIsbn.setError("Campo obrigatório!");
+                    txtIsbn.requestFocus();
+                    return;
+                }
+
                 Ebook ebook = new Ebook(isbn, null, titulo, autor, sinopse, tipo,null);
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("ebooks/" + ebook.getTipo() + "/" + ebook.getIsbn());
+                DatabaseReference myRef = database.getReference("ebooks").child(ebook.getIsbn());
 
                 myRef.setValue(ebook);
 

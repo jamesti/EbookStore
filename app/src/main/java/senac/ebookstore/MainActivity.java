@@ -1,5 +1,6 @@
 package senac.ebookstore;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -24,45 +25,46 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import senac.ebookstore.adapters.EbookAdapter;
 import senac.ebookstore.models.Ebook;
-import senac.ebookstore.models.EbookFirebaseHelper;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
 
-    private static List<Ebook> ebookList;
-
     private RecyclerView recyclerView;
+    EbookAdapter adapter;
 
-    private EbookFirebaseHelper ebookFirebaseHelper;
+    private List<Ebook> ebookList = new ArrayList<>();
+
+    ProgressDialog progressDialog;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-                    = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    switch (item.getItemId()) {
-                        case R.id.navigation_home:
-                            //mTextMessage.setText(R.string.title_home);
-                            return true;
-                        case R.id.navigation_romances:
-                            //mTextMessage.setText(R.string.title_dashboard);
-                            return true;
-                        case R.id.navigation_negocios:
-                            //mTextMessage.setText(R.string.title_notifications);
-                            return true;
-                        case R.id.navigation_tecnicos:
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    //mTextMessage.setText(R.string.title_home);
+                    return true;
+                case R.id.navigation_romances:
+                    //mTextMessage.setText(R.string.title_dashboard);
+                    return true;
+                case R.id.navigation_negocios:
+                    //mTextMessage.setText(R.string.title_notifications);
+                    return true;
+                case R.id.navigation_tecnicos:
 
-                            return true;
-                        case R.id.navigation_ebook:
-                            Intent intent = new Intent(getBaseContext(), EbookActivity.class);
-                            startActivity(intent);
-                            return true;
-                    }
-                    return false;
+                    return true;
+                case R.id.navigation_ebook:
+                    Intent intent = new Intent(getBaseContext(), EbookActivity.class);
+                    startActivity(intent);
+                    return true;
+            }
+            return false;
         }
     };
 
@@ -79,19 +81,41 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("ebooks");
 
-        ebookFirebaseHelper = new EbookFirebaseHelper(myRef);
-
-        //ebookList = ebookFirebaseHelper.retrieve();
-
         recyclerView = findViewById(R.id.listEbooks);
 
+        recyclerView.setHasFixedSize(true);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(
-                new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
-        EbookAdapter adapter = new EbookAdapter(ebookFirebaseHelper.retrieve(), this);
+        progressDialog = new ProgressDialog(this);
 
-        recyclerView.setAdapter(adapter);
+        progressDialog.setMessage("Carregando...");
+
+        progressDialog.show();
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ebookList.clear();
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Ebook ebook = ds.getValue(Ebook.class);
+                    ebookList.add(ebook);
+                }
+
+                adapter = new EbookAdapter(ebookList, MainActivity.this);
+
+                recyclerView.setAdapter(adapter);
+
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                progressDialog.dismiss();
+            }
+        });
     }
 
     @Override
@@ -100,4 +124,5 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
+
 }

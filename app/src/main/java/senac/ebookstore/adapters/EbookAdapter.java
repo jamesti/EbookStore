@@ -42,15 +42,13 @@ public class EbookAdapter extends RecyclerView.Adapter<EbookAdapter.EbookViewHol
 
     @Override
     public void onBindViewHolder(@NonNull EbookViewHolder holder, int position) {
-        EbookViewHolder viewHolder = (EbookViewHolder) holder;
-
         final Ebook ebook = ebookList.get(position);
 
-        //viewHolder.imgEbook.setImageURI(Uri.parse(ebook.getImageUrl()));
-        viewHolder.txtTitulo.setText(ebook.getTitulo());
-        viewHolder.txtTipo.setText(ebook.getTipo());
-        viewHolder.txtAutor.setText(ebook.getAutor());
-        viewHolder.txtSinopse.setText(ebook.getSinopse());
+        holder.imgEbook.setImageResource(R.drawable.common_google_signin_btn_icon_dark_normal);
+        holder.txtTitulo.setText(ebook.getTitulo());
+        holder.txtTipo.setText(ebook.getTipo());
+        holder.txtAutor.setText(ebook.getAutor());
+        holder.txtSinopse.setText(ebook.getSinopse());
 
         /*
         viewHolder.delete.setOnClickListener(new View.OnClickListener() {
