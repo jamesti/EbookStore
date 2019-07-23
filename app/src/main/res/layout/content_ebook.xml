@@ -46,4 +46,5 @@
         android:ems="10"
         android:hint="Sinopse do Livro"
         android:inputType="textPersonName" />
+
 </LinearLayout>

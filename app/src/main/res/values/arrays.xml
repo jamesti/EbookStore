@@ -10,8 +10,8 @@
         <item>reply_all</item>
     </string-array>
     <string-array name="tipos">
-        <item value="romances">romances</item>
-        <item value="tecnicos">tecnicos</item>
-        <item value="negocios">negocios</item>
+        <item>Romances</item>
+        <item>Técnicos</item>
+        <item>Negócios</item>
     </string-array>
 </resources>
