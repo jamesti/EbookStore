@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import senac.ebookstore.R;
@@ -44,11 +46,16 @@ public class EbookAdapter extends RecyclerView.Adapter<EbookAdapter.EbookViewHol
     public void onBindViewHolder(@NonNull EbookViewHolder holder, int position) {
         final Ebook ebook = ebookList.get(position);
 
-        holder.imgEbook.setImageResource(R.drawable.common_google_signin_btn_icon_dark_normal);
         holder.txtTitulo.setText(ebook.getTitulo());
         holder.txtTipo.setText(ebook.getTipo());
         holder.txtAutor.setText(ebook.getAutor());
         holder.txtSinopse.setText(ebook.getSinopse());
+
+        if (ebook.getImageUrl() == null || ebook.getImageUrl().isEmpty()){
+            holder.imgEbook.setImageResource(R.drawable.ic_book_black_24dp);
+        } else {
+            Picasso.get().load(ebook.getImageUrl()).into(holder.imgEbook);
+        }
 
         /*
         viewHolder.delete.setOnClickListener(new View.OnClickListener() {

@@ -47,4 +47,12 @@
         android:hint="Sinopse do Livro"
         android:inputType="textPersonName" />
 
+    <EditText
+        android:id="@+id/txtImagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="URL de Imagem"
+        android:inputType="textUri|textPersonName" />
+
 </LinearLayout>

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -18,7 +19,7 @@ import senac.ebookstore.models.Ebook;
 
 public class EbookActivity extends AppCompatActivity {
 
-    TextView txtIsbn, txtTitulo, txtAutor, txtSinopse;
+    TextView txtIsbn, txtTitulo, txtAutor, txtSinopse, txtImageUrl;
     Spinner spinnerTipos;
 
     @Override
@@ -33,6 +34,7 @@ public class EbookActivity extends AppCompatActivity {
         txtTitulo = findViewById(R.id.txtTitulo);
         txtAutor = findViewById(R.id.txtAutor);
         txtSinopse = findViewById(R.id.txtSinopse);
+        txtImageUrl = findViewById(R.id.txtImagem);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +46,7 @@ public class EbookActivity extends AppCompatActivity {
                 String autor = txtAutor.getText().toString();
                 String tipo = (String) spinnerTipos.getSelectedItem();
                 String sinopse = txtSinopse.getText().toString();
+                String UrlImage = txtImageUrl.getText().toString();
 
                 if (isbn.isEmpty()) {
                     txtIsbn.setError("Campo obrigatório!");
@@ -63,7 +66,7 @@ public class EbookActivity extends AppCompatActivity {
                 }
 
 
-                Ebook ebook = new Ebook(isbn, null, titulo, autor, sinopse, tipo, null);
+                Ebook ebook = new Ebook(isbn, UrlImage, titulo, autor, sinopse, tipo, null);
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference("ebooks").child(ebook.getIsbn());
