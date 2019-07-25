@@ -38,11 +38,13 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     EbookAdapter adapter;
 
-    DatabaseReference myRef;
+    static DatabaseReference myRef;
 
     private List<Ebook> ebookList = new ArrayList<>();
 
     ProgressDialog progressDialog;
+
+    private static boolean FIREBASE_OFFLINE;
 
     private ValueEventListener ListenerGeral = new ValueEventListener() {
         @Override
@@ -105,7 +107,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        if (!FIREBASE_OFFLINE) {
+            database.setPersistenceEnabled(true);
+            FIREBASE_OFFLINE = true;
+        }
+
         myRef = database.getReference("ebooks");
+        myRef.keepSynced(true);
 
         recyclerView = findViewById(R.id.listEbooks);
 
